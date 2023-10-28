@@ -5,7 +5,9 @@ date: "2023-10-27"
 output: html_document
 ---
 
-
+```{r, echo=FALSE}
+set.seed(0)
+```
 
 ## FSDS - Chapter 3
 
@@ -19,12 +21,27 @@ illustrate the law of large numbers.
 
 **Solution**
 
-...
+We simulate a list of independent samples from a normal population.
 
 ```{r 3_12}
+n <- 100
+x <- rnorm(n)
+y <- rep(0, n)
+
+for (i in 1:n) {
+  y[i] <- mean(x[1:i])
+}
+
+x_axis = 1:n
+plot(x_axis, abs(y), type='l', ylim=c(-0.1, +1.1), 
+     main='Absolute sample mean', xlab='n', ylab='abs mean')
+lines(c(1, n), c(0, 0), col='red')
+lines(x_axis, +x_axis^(-1/2), col='red', lty='dashed')
+
 ```
 
-...
+The solid black line shows how the absolute sample mean is converging to 0 as
+the sample size increases, while the dashed red line is its expected behavior. 
 
 
 
