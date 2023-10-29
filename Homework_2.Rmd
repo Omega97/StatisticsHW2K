@@ -106,12 +106,22 @@ the likelihood function.
 
 **Solution**
 
-...
+The geometric distribution is $f(y;p) = (1-p)^{1-y} \space p$, and the first outcome of our geometric random variable $X$ is $y=3$. We can use this information to calculate the log-likelihood function:
+
+$$l(p|\bar y) = \sum_{i=1}^n{log(f(y_i;p))} = \sum_{i=1}^n{log((1-p)^{y_i-\} \space p)} = \sum_{i=1}^n{[(y_i-\) \space log(1-p)+log(p)])} $$
+$$ = \sum_{i=1}^n{[(1-y_i) \space log(1-p)+log(p)])} = log(1-p) (n-n \space \hat y) + n \space log(p)$$
+$$ = n[log(1-p) (\space \hat y - 1) + \space log(p)]$$
+In our case, $n=1$ and $y=3$, therefore:
+
+$$ l(p|y=3) = 1*[log(1-p)(3-1) + log(p)] = 2 \space log(1-p) + log(p) $$
+We can now compute the likelihood:
+
+$$L(p|y=3)=exp(l(p|y=3)) = (1-p)^2 p$$
 
 ```{r 4_2}
+p <- seq(0, 1, length.out=101)
+plot(p, (1-p)^2 * p, type='l', main='Likelyhood', ylab='L(p)')
 ```
-
-...
 
 
 
