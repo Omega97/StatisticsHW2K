@@ -83,12 +83,13 @@ large should n be so that the standard error of the sample proportion is 0.04?
 
 **Solution**
 
-...
+The problem suggests to start from an initial uncertainty of a binomial distribution with parameter $p=1/2$, which is $\sigma_0 = 1/2$ 
 
-```{r 3_28}
-```
+$$SE = \frac{\sigma_0}{\sqrt n} $$
+$$n =  \frac{\sigma_0^2}{SE^2} = \frac{0.5^2}{0.04^2} = 156.25 $$
 
-...
+In order for the standard error of the sample proportion to be $SE=0.04$, the
+sample size should be at least around 156.
 
 
 
