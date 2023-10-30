@@ -6,18 +6,18 @@ Stromieri, Cusma Fait, Esposito, Lucas
 Due November 10th
 
 FSDS: Chapter 3 
-> 3.12 Omar
-> 3.18
-> 3.28 Omar
+* 3.12 Omar
+* 3.18
+* 3.28 Omar
 
 FSDS: Chapter 4
-> 4.2 Omar
-> 4.4
-> 4.38
-> 4.44
-> 4.48
+* 4.2 Omar
+* 4.4
+* 4.38
+* 4.44
+* 4.48
 
 FSDS: Chapter 5
-> 5.2
-> 5.12
-> 5.68
+* 5.2
+* 5.12
+* 5.68
