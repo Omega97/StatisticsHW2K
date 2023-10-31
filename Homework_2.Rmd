@@ -66,13 +66,45 @@ sample all 90,000 residents.
 
 **Solution**
 
-...
+a) 
 
+The population distribution of Sunshine City's residents has a mean of 72 years and a standard deviation of 12 years. This means the center of the population distribution is at 72 years, and the spread, which is measured by the standard deviation, is 12 years. Since it's mentioned that the age distribution is skewed to the left, we can infer that it has a negatively skewed or left-skewed shape. This means that there may be a longer tail to the left of the mean, and the majority of the residents may be clustered to the right of the mean.
+
+The sample data distribution represents a random sample of 100 residents from Sunshine City. The sample has a sample mean  of 70 years and a sample standard deviation of 11 years. The center of the sample data distribution is given by the sample mean, which is 70 years, and the spread is given by the sample standard deviation, which is 11 years.
+
+The shape of the sample data distribution is likely to resemble the shape of the population distribution. This is because, for a sufficiently large random sample (typically n > 30), the central limit theorem comes into play. In this case, with a sample size of 100, it is reasonable to assume that the sample data distribution will have a shape close to a normal distribution (bell-shaped curve).
+
+Additionally, since the population distribution is skewed to the left, the sample data distribution may still have some evidence of left-skewness, but it will be less pronounced than the population distribution. The larger the sample size, the more it tends to approximate a normal distribution.
+
+b) 
+
+As stated above, when we consider the mean of a large enough(usually $n\ge30$) random sample the Central Limit Theorem comes into play. Therefore, we have that 
+$$
+Y = \frac{\sum_{i=1}^n Y_i}{n} \sim N(\mu,\frac{\sigma}{\sqrt{n}}) =_{|\mu=72,\sigma=12,n=100} N(72,\frac{12}{\sqrt{100}}) 
+$$
+This states that the mean of the observations is approximately normally-distributed, it resembles to the theoretical mean and its variance decreases as $n$ increases.
+
+c)
+
+Sampling a person of age 60 would not be very unusual since we are considering a population with a mean of $\mu=72$ and a standard deviation of $\sigma=12$. In fact, $60$ is only one single standard deviation far from the mean. 
+Furthermore, we have to take into account the fact that the population has a left-skewed distribution, thus, we expect a long left-tailed density ditribution. 
+
+all these considerations strengthen the thesis that sampling a 60 years old person would not be so unusual.
+
+However, sampling a random sample with mean $60$ is very far from reality. in fact, as stated above, due to the CLT, when we consider the mean of large samples, their variance would decrease as their size increases. Moreover, for the same reasons, even the left-skewness hypothesis can not be considered.
+
+in fact, as stated that the R code bellow, the probability to pick a random sample with a mean less or equals to $60$ for a sample size $n=100$ is less than $7.7\times e^{-24}$
 ```{r 3_18}
+n <- 100
+mean <- 72
+sd <- 12 / sqrt(n) 
+pnorm(60,mean,sd)
+
 ```
+d)
 
-...
-
+Firstly, we are asked to consider a single sample. Obviously, since $n=1$ and $1$ is not large, we can not apply the CLT, therefore, the sample mean $\frac{Y}{n}=\frac{Y_1}{1}=Y_1$ has the same distribution as the population.
+Secondly, if we consider a sample as large ($n=90000$) as the population, then the concept of sample has no meaning anymore, so we don't need to use statistical inference tools, we can directly compute our metrics from the data that we have.
 
 
 ### Ex 3.28
@@ -132,13 +164,36 @@ ML estimate of the population proportion believing in life after death. Construc
 confidence interval, using its formula (4.8). Interpret.
 
 **Solution**
-
-...
-
-```{r 4_4}
+We know from the theory that the MLE for $p$, the parameter of a Binomial distribution $Y = \sum_{i=1}^n Y_i$ where $Y_i$ is a Bernoulli distribution with parameter $p$  is given by 
+$$
+\hat{\pi} = \frac{\sum_{i=1}^n y_i}{n}
+$$
+Therefore, after setting all the variables up
+```{r 4_4_a}
+students <- read.table("http://stat4ds.rwth-aachen.de/data/Students.dat",header=T)
+n <- nrow(students)
+n_believers <- nrow(students[students$life == 1,])
 ```
-
 ...
+we can compute
+```{r 4_4_b}
+pi_hat <- n_believers / n
+pi_hat
+```
+Then, we are able to compute the $95\%$ confidence interval for $\pi$ using the formula
+$$
+\hat\pi\pm z_{\frac{\alpha}{2}}\sqrt{\frac{\hat\pi(1-\hat\pi)}{n}}
+$$
+So, we can write the following R code
+```{r 4_4_c}
+se <- sqrt(pi_hat * (1-pi_hat) / n )
+ci <- pi_hat + pnorm(0.5 / 2) * se * c(1,-1)
+ci
+```
+...
+
+
+
 
 
 
