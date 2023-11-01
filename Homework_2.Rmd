@@ -80,7 +80,7 @@ b)
 
 As stated above, when we consider the mean of a large enough(usually $n\ge30$) random sample the Central Limit Theorem comes into play. Therefore, we have that 
 $$
-Y = \frac{\sum_{i=1}^n Y_i}{n} \sim N(\mu,\frac{\sigma}{\sqrt{n}}) =_{|\mu=72,\sigma=12,n=100} N(72,\frac{12}{\sqrt{100}}) 
+Y = \frac{\sum_{i=1}^n Y_i}{n} \sim N(\mu,\frac{\sigma^2}{n}) =_{|\mu=72,\sigma=12,n=100} N(72,\frac{12^2}{100}) 
 $$
 This states that the mean of the observations is approximately normally-distributed, it resembles to the theoretical mean and its variance decreases as $n$ increases.
 
