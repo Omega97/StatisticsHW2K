@@ -152,7 +152,7 @@ $$L(p|y=3)=exp(l(p|y=3)) = (1-p)^2 p$$
 
 ```{r 4_2}
 p <- seq(0, 1, length.out=101)
-plot(p, (1-p)^2 * p, type='l', main='Likelyhood', ylab='L(p)')
+plot(p, (1-p)^2 * p, type='l', main='Likelihood', ylab='L(p)')
 ```
 
 
@@ -207,7 +207,7 @@ For independent observations $y_1, . . . , y_n$ having the geometric distributio
 
 **Solution**
 
-...
+
 a) Let's suppose we are working with i.i.d.observations $y_1,y_2,\ldots,y_n$ following the geometric distribution $f(y)=(1-\pi)^{y-1} \pi$.
 
 The likelihood function for $\pi$ is: 
@@ -225,9 +225,7 @@ Then we differentiate and equate to zero : $$\frac{\partial l(\pi)}{\partial \pi
 $$ \frac{n}{\pi} - \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi} = 0 $$
 $$ \frac{n}{\pi} = \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi} \rightarrow n (1-\pi) = \pi (\sum_{i=1}^{n}y_i -n)\rightarrow n = \pi (n+ \sum_{i=1}^{n}y_i -n)$$
 $$ \pi = \frac{n}{\sum_{i=1}^{n}y_i}$$
-We can conclude that $\frac{n}{\sum_{i=1}^{n}y_i}$ is the maximum likelihood estimator for $\pi$
-...
-
+We can conclude that $\frac{n}{\sum_{i=1}^{n}y_i}$ is the maximum likelihood estimator for $\pi$.
 
 
 ### Ex 4.44
