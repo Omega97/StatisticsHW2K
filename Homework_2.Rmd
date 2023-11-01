@@ -208,10 +208,24 @@ For independent observations $y_1, . . . , y_n$ having the geometric distributio
 **Solution**
 
 ...
+a) Let's suppose we are working with i.i.d.observations $y_1,y_2,\ldots,y_n$ following the geometric distribution $f(y)=(1-\pi)^{y-1} \pi$.
 
-```{r 4_38}
-```
+The likelihood function for $\pi$ is: 
+$$ L(\pi) = \pi^{n}(1-\pi)^{{\sum_{i=1}^{n}y_i} - n}$$.
 
+We know that a sufficient statistic $T(Y)$ exists when the likelihood function factors as 
+$L(\theta) = g[T(y);\theta]h(y)$ where the first function $g$ involves $\theta$ and depends on the data through $T(y)$ and the second function $h$ is independent of $\theta$.
+
+We can now obtain a sufficient statistic for $\pi$ by multiplying the likelihood function by one:  $$ L(\pi) = \pi^{n}(1-\pi)^{({\sum_{i=1}^{n}y_i}) - n} \cdot 1$$
+where $g[T(y);\theta] = \pi^{n}(1-\pi)^{({\sum_{i=1}^{n}y_i}) - n}$, $T(Y) = {\sum_{i=1}^{n}y_i}$ and $h(y) = 1$.
+We can gather that $T(Y) = {\sum_{i=1}^{n}y_i}$ is a sufficient statistic for $\pi$.
+
+b) To find the maximum likelihood estimator for $\pi$ let's first compute the log likelihood function: $$ l(\pi) = n ln(\pi)+(\sum_{i=1}^{n}y_i) ln(1-\pi)$$.
+Then we differentiate and equate to zero : $$\frac{\partial l(\pi)}{\partial \pi} = \frac{n}{\pi} - \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi}$$
+$$ \frac{n}{\pi} - \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi} = 0 $$
+$$ \frac{n}{\pi} = \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi} \rightarrow n (1-\pi) = \pi (\sum_{i=1}^{n}y_i -n)\rightarrow n = \pi (n+ \sum_{i=1}^{n}y_i -n)$$
+$$ \pi = \frac{n}{\sum_{i=1}^{n}y_i}$$
+We can conclude that $\frac{n}{\sum_{i=1}^{n}y_i}$ is the maximum likelihood estimator for $\pi$
 ...
 
 
