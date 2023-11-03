@@ -247,12 +247,67 @@ Which distribution seems to be more appropriate for summarizing the selling pric
 
 **Solution**
 
-...
 
-```{r 4_44}
+```{r packages}
+library(MASS)
+
+```
+Let's download the data-set
+```{r datset}
+Houses <- read.table("http://stat4ds.rwth-aachen.de/data/Houses.dat", header=TRUE)
 ```
 
-...
+a) Using the "fitdistr" function let's fit the normal distribution to the data by finding the MLE for its parameters.
+```{r fit}
+normal <- fitdistr(Houses$price, "normal")
+```
+These are the estimates for $\mu$ and $\sigma$
+```{r estimate}
+normal$estimate
+```
+b) We can do the same for the log-normal distribution
+```{r log fit}
+lognormal <- fitdistr(Houses$price, "lognormal")
+```
+These are the estimates for $\mu$ and $\sigma$
+```{r log estimate}
+lognormal$estimate
+```
+c) For the normal distribution we already found the mean and standard deviation in point a):
+```{r}
+normal$estimate
+```
+Using the parameter estimates from point b) we can compute the mean and standard deviation for the log normal:
+$E(Y) = e^{\mu+ \frac{\sigma^2}{2}}$ , $sd(Y)= \sqrt{(e^{\sigma^2}-1)* E(Y)^2}$.
+```{r}
+mu <- lognormal$estimate[[1]]
+sigma <- lognormal$estimate[[2]]
+
+```
+
+```{r}
+log_mean <- exp(mu+sigma^2/2)
+log_mean
+```
+```{r}
+log_sd <- sqrt( (exp(sigma^2)-1) * log_mean^2)
+log_sd
+```
+As we can see the means we computed for the two distributions are almost the same, whereas the variance of the normal distribution is higher than the variance of the log-normal distribution.
+
+d) We superimposed the fitted normal and log-normal on a histogram of the data
+```{r hist}
+par(mfrow = c(1,2))
+domain <- 0:900
+hist(Houses$price, xlab = 'house prices', main= 'Normal distribution', freq = FALSE)
+points(dnorm(domain ,normal$estimate[[1]], normal$estimate[[2]] ), col = 'red', type = 'l' )
+
+hist(Houses$price, xlab = 'house prices', main= 'Lognormal distribution', freq = FALSE)
+points(dlnorm(domain ,lognormal$estimate[[1]], lognormal$estimate[[2]] ), col = 'red', type = 'l' )
+```
+
+By looking at the graphs the log-normal distribution seems the most appropriate to summarize the selling prices.
+The data exhibits a right skewness that is better described by the log-normal distribution.
 
 
 
