@@ -320,14 +320,23 @@ is a safe sample size for estimating a proportion to within M with 95% confidenc
 
 **Solution**
 
-...
+Let's compute the standard error for the sample proportion $SE(\pi) = \sqrt{\frac{\pi (1-\pi)}{n}}$ for $\pi = 0.5$.
+$$ SE(\pi) = \sqrt{\frac{0.5 ^2}{n}} \rightarrow \frac{0.5}{\sqrt{n}}$$
+We know that for a sample proportion a value of $\pi = 0.5$ produces the maximum standard error, this is due to the fact that we have the most uncertainty about the population proportion.
 
-```{r 4_48}
-```
+Let's compute other two SE for different values of $\pi$: $\pi_1 = 0.1$ and $\pi_2 = 0.8$.
+$ SE(\pi_1) = \sqrt{\frac{0.1*0.9}{n}}\rightarrow \frac{0.28}{\sqrt{n}}$ and $ SE(\pi_2) = \sqrt{\frac{0.2*0.8}{n}}\rightarrow \frac{0.36}{\sqrt{n}}$.
+Both these standard errors are lower than the standard error for $\pi = 0.5$, as expected.
 
-...
+Assuming we have a large enough sample size, the distribution of the sample proportion becomes approximately normal due to the Central Limit Theorem.
 
+For a normal distribution roughly 95% of the data falls within two standard deviations of the mean.
+When $\pi = 0.5$ about 95% of the time, the sample proportion will be within 2 * 0.5/√n of the true population proportion, meaning that the error is no more than $\frac{1}{\sqrt{n}}$.
+The same applies to all the other values of $\pi$, since the standard error will be different but always smaller than the SE with $\pi = 0.5$.
 
+To show that $n = \frac{1}{M^2}$ is a safe sample size to within M with 
+95% probability, let's consider that $M = 1.96 * SE(\pi) =1.96 \sqrt{\frac{\pi (1-\pi)}{n}}$.
+Let's work with $\pi = 0.5$, the value that maximizes the SE, solving for n we obtain that $n = \frac{1.96^2 * 0.5 ^ 2}{M^2} = \frac{0.96}{M^2}$. Since $n = \frac{1}{M^2} > \frac{0.96}{M^2}$ that is the worst scenario case for the SE, we can safely say that $n = \frac{1}{M^2}$ is an acceptable sample size.
 
 ## FSDS - Chapter 5
 
