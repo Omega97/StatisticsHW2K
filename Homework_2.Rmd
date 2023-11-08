@@ -364,7 +364,9 @@ z = (0.52 - 0.50) / sqrt(0.5*(1 - 0.5) / 1200)
 
 and use such test statistic to determine the $p$-value of the hypothesized proportion, i.e. the probability that the sample proportion deviates from the one computed under $H_0$ (namely assuming $\pi$ is the population proportion). The computed $p$-value is doubled due to the double-sided nature of the considered alternative hypothesis.
 
-$p = 2 \cdot P(Z \geq z) = 2 \cdot (1 - P(Z \leq z))$
+$$
+p = 2 \cdot P(Z \geq z) = 2 \cdot (1 - P(Z \leq z))
+$$
 
 ```{r}
 p = 2 * pnorm(z, 0, 1, lower.tail=F)
