@@ -80,20 +80,19 @@ b)
 
 As stated above, when we consider the mean of a large enough(usually $n\ge30$) random sample the Central Limit Theorem comes into play. Therefore, we have that 
 $$
-Y = \frac{\sum_{i=1}^n Y_i}{n} \sim N(\mu,\frac{\sigma^2}{n}) =_{|\mu=72,\sigma=12,n=100} N(72,\frac{12^2}{100}) 
+Y = \frac{\sum_{i=1}^n Y_i}{n} \sim N(\mu,\frac{\sigma^2}{n}) |_{\mu=72,\sigma=12,n=100} = N(72,\frac{12^2}{100}) 
 $$
-This states that the mean of the observations is approximately normally-distributed, it resembles to the theoretical mean and its variance decreases as $n$ increases.
+This states that the mean of the observations is approximately normally distributed, it resembles the theoretical mean and its variance decreases as $n$ increases.
 
 c)
 
 Sampling a person of age 60 would not be very unusual since we are considering a population with a mean of $\mu=72$ and a standard deviation of $\sigma=12$. In fact, $60$ is only one single standard deviation far from the mean. 
-Furthermore, we have to take into account the fact that the population has a left-skewed distribution, thus, we expect a long left-tailed density ditribution. 
+Furthermore, we have to take into account the fact that the population has a left-skewed distribution, thus, we expect a long left-tailed density distribution. 
+All these considerations strengthen the thesis that sampling a 60 years old person would not be so unusual.
 
-all these considerations strengthen the thesis that sampling a 60 years old person would not be so unusual.
+However, sampling a random sample with mean $60$ is very far from reality. In fact, as stated above, due to the CLT, when we consider the mean of large samples, their variance would decrease as their size increases. Moreover, for the same reasons, even the left-skewness hypothesis can not be considered.
 
-However, sampling a random sample with mean $60$ is very far from reality. in fact, as stated above, due to the CLT, when we consider the mean of large samples, their variance would decrease as their size increases. Moreover, for the same reasons, even the left-skewness hypothesis can not be considered.
-
-in fact, as stated that the R code bellow, the probability to pick a random sample with a mean less or equals to $60$ for a sample size $n=100$ is less than $7.7\times e^{-24}$
+In fact, as stated that the R code bellow, the probability to pick a random sample with a mean less or equal to $60$ for a sample size $n=100$ is less than $7.7\times 10^{-24}$
 ```{r 3_18}
 n <- 100
 mean <- 72
@@ -103,15 +102,13 @@ pnorm(60,mean,sd)
 ```
 d)
 
-Firstly, we are asked to consider a single sample. Obviously, since $n=1$ and $1$ is not large, we can not apply the CLT, therefore, the sample mean $\frac{Y}{n}=\frac{Y_1}{1}=Y_1$ has the same distribution as the population.
-Secondly, if we consider a sample as large ($n=90000$) as the population, then the concept of sample has no meaning anymore, so we don't need to use statistical inference tools, we can directly compute our metrics from the data that we have.
+Firstly, we are asked to consider a single sample. Obviously, since $n=1$ and $1$ is not large, we cannot apply the CLT, therefore, the sample mean $\frac{Y}{n}=\frac{Y_1}{1}=Y_1$ has the same distribution as the population.
+Secondly, if we consider a sample as large ($n=90,000$) as the population, then the concept of sample has no meaning anymore, so we don't need to use statistical inference tools, we can directly compute our metrics from the data that we have.
 
 
 ### Ex 3.28
 
-A survey is planned to estimate the population proportion π supporting more government
-action to address global warming. For a simple random sample, if $\pi$ may be near 0.50, how
-large should n be so that the standard error of the sample proportion is 0.04?
+A survey is planned to estimate the population proportion $\pi$ supporting more government action to address global warming. For a simple random sample, if $\pi$ may be near $0.50$, how large should $n$ be so that the standard error of the sample proportion is $0.04$?
 
 **Solution**
 
@@ -131,16 +128,15 @@ sample size should be at least around 156.
 
 ### Ex 4.2
 
-For a sequence of observations of a binary random variable, you observe the geometric random
-variable (Section 2.2.2) outcome of the first success on observation number $y = 3$. Find and plot
-the likelihood function.
+For a sequence of observations of a binary random variable, you observe the geometric random variable (Section 2.2.2) outcome of the first success on observation number $y = 3$. Find and plot the likelihood function.
 
 
 **Solution**
 
 The geometric distribution is $f(y;p) = (1-p)^{1-y} \space p$, and the first outcome of our geometric random variable $X$ is $y=3$. We can use this information to calculate the log-likelihood function:
 
-$$l(p|\bar y) = \sum_{i=1}^n{log(f(y_i;p))} = \sum_{i=1}^n{log((1-p)^{y_i-\} \space p)} = \sum_{i=1}^n{[(y_i-\) \space log(1-p)+log(p)])} $$
+$$l(p|\bar y) = \sum_{i=1}^n{log(f(y_i;p))} = \sum_{i=1}^n{log((1-p)^{1-y_i} \space p)} $$
+$$ = \sum_{i=1}^n{[(1-y_i) \space log(1-p)+log(p)])} $$
 $$ = \sum_{i=1}^n{[(1-y_i) \space log(1-p)+log(p)])} = log(1-p) (n-n \space \hat y) + n \space log(p)$$
 $$ = n[log(1-p) (\space \hat y - 1) + \space log(p)]$$
 In our case, $n=1$ and $y=3$, therefore:
@@ -159,24 +155,18 @@ plot(p, (1-p)^2 * p, type='l', main='Likelihood', ylab='L(p)')
 
 ### Ex 4.4
 
-For the ```Students``` data file (Exercise 1.2 in Chapter 1) and corresponding population, find the
-ML estimate of the population proportion believing in life after death. Construct a Wald 95%
-confidence interval, using its formula (4.8). Interpret.
+For the ```Students``` data file (Exercise 1.2 in Chapter 1) and corresponding population, find the ML estimate of the population proportion believing in life after death. Construct a Wald $95%$ confidence interval, using its formula (4.8). Interpret.
 
 **Solution**
-We know from the theory that the MLE for $p$, the parameter of a Binomial distribution $Y = \sum_{i=1}^n Y_i$ where $Y_i$ is a Bernoulli distribution with parameter $p$  is given by 
+We know from the theory that the MLE for $p$, the parameter of a Binomial distribution $Y = \sum_{i=1}^n y_i$ where $y_i$ follows a Bernoulli distribution with parameter $p$ is given by 
 $$
-\hat{\pi} = \frac{\sum_{i=1}^n y_i}{n}
+\hat{\pi} = \frac{1}{n} \sum_{i=1}^n y_i
 $$
-Therefore, after setting all the variables up
+First, we estimate the probability $\hat \pi$:
 ```{r 4_4_a}
 students <- read.table("http://stat4ds.rwth-aachen.de/data/Students.dat",header=T)
 n <- nrow(students)
 n_believers <- nrow(students[students$life == 1,])
-```
-...
-we can compute
-```{r 4_4_b}
 pi_hat <- n_believers / n
 pi_hat
 ```
@@ -184,15 +174,12 @@ Then, we are able to compute the $95\%$ confidence interval for $\pi$ using the 
 $$
 \hat\pi\pm z_{\frac{\alpha}{2}}\sqrt{\frac{\hat\pi(1-\hat\pi)}{n}}
 $$
-So, we can write the following R code
+So, we can compute the confidence interval:
 ```{r 4_4_c}
 se <- sqrt(pi_hat * (1-pi_hat) / n )
 ci <- pi_hat + pnorm(0.5 / 2) * se * c(1,-1)
 ci
 ```
-...
-
-
 
 
 
@@ -208,7 +195,7 @@ For independent observations $y_1, . . . , y_n$ having the geometric distributio
 **Solution**
 
 
-a) Let's suppose we are working with i.i.d.observations $y_1,y_2,\ldots,y_n$ following the geometric distribution $f(y)=(1-\pi)^{y-1} \pi$.
+a) Let's suppose we are working with i.i.d. observations $y_1,y_2,\ldots,y_n$ following the geometric distribution $f(y)=(1-\pi)^{y-1} \pi$.
 
 The likelihood function for $\pi$ is: 
 $$ L(\pi) = \pi^{n}(1-\pi)^{{\sum_{i=1}^{n}y_i} - n}$$.
@@ -216,22 +203,26 @@ $$ L(\pi) = \pi^{n}(1-\pi)^{{\sum_{i=1}^{n}y_i} - n}$$.
 We know that a sufficient statistic $T(Y)$ exists when the likelihood function factors as 
 $L(\theta) = g[T(y);\theta]h(y)$ where the first function $g$ involves $\theta$ and depends on the data through $T(y)$ and the second function $h$ is independent of $\theta$.
 
-We can now obtain a sufficient statistic for $\pi$ by multiplying the likelihood function by one:  $$ L(\pi) = \pi^{n}(1-\pi)^{({\sum_{i=1}^{n}y_i}) - n} \cdot 1$$
+We can now obtain a sufficient statistic for $\pi$ by multiplying the likelihood function by one:  
+$$ L(\pi) = \pi^{n}(1-\pi)^{({\sum_{i=1}^{n}y_i}) - n} \cdot 1$$
 where $g[T(y);\theta] = \pi^{n}(1-\pi)^{({\sum_{i=1}^{n}y_i}) - n}$, $T(Y) = {\sum_{i=1}^{n}y_i}$ and $h(y) = 1$.
+
 We can gather that $T(Y) = {\sum_{i=1}^{n}y_i}$ is a sufficient statistic for $\pi$.
 
-b) To find the maximum likelihood estimator for $\pi$ let's first compute the log likelihood function: $$ l(\pi) = n ln(\pi)+(\sum_{i=1}^{n}y_i) ln(1-\pi)$$.
+b) To find the maximum likelihood estimator for $\pi$ let's first compute the log likelihood function: $$ l(\pi) = n \space ln(\pi)+(\sum_{i=1}^{n}y_i) \space ln(1-\pi)$$
+
 Then we differentiate and equate to zero : $$\frac{\partial l(\pi)}{\partial \pi} = \frac{n}{\pi} - \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi}$$
 $$ \frac{n}{\pi} - \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi} = 0 $$
-$$ \frac{n}{\pi} = \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi} \rightarrow n (1-\pi) = \pi (\sum_{i=1}^{n}y_i -n)\rightarrow n = \pi (n+ \sum_{i=1}^{n}y_i -n)$$
-$$ \pi = \frac{n}{\sum_{i=1}^{n}y_i}$$
-We can conclude that $\frac{n}{\sum_{i=1}^{n}y_i}$ is the maximum likelihood estimator for $\pi$.
+$$ \frac{n}{\pi} = \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi} $$
+$$ n (1-\pi) = \pi (\sum_{i=1}^{n}y_i -n) $$
+$$ n = \pi (n+ \sum_{i=1}^{n}y_i -n)$$
+$$ \hat \pi = \frac{n}{\sum_{i=1}^{n}y_i} = \frac{1}{\hat y}$$
+We can conclude that $\frac{1}{\hat y}$ is the maximum likelihood estimator for $\pi$.
 
 
 ### Ex 4.44
 
-Refer to the previous two exercises. Consider the selling prices (in thousands of dollars) in the
-Houses data file mentioned in Exercise 4.31.
+Refer to the previous two exercises. Consider the selling prices (in thousands of dollars) in the Houses data file mentioned in Exercise 4.31.
 
 (a) Fit the normal distribution to the data by finding the ML estimates of µ and σ for that
 distribution.
@@ -282,7 +273,6 @@ $E(Y) = e^{\mu+ \frac{\sigma^2}{2}}$ , $sd(Y)= \sqrt{(e^{\sigma^2}-1)* E(Y)^2}$.
 ```{r}
 mu <- lognormal$estimate[[1]]
 sigma <- lognormal$estimate[[2]]
-
 ```
 
 ```{r}
@@ -321,7 +311,7 @@ is a safe sample size for estimating a proportion to within M with 95% confidenc
 **Solution**
 
 Let's compute the standard error for the sample proportion $SE(\pi) = \sqrt{\frac{\pi (1-\pi)}{n}}$ for $\pi = 0.5$.
-$$ SE(\pi) = \sqrt{\frac{0.5 ^2}{n}} \rightarrow \frac{0.5}{\sqrt{n}}$$
+$$ SE(\pi) = \sqrt{\frac{0.5 ^2}{n}} = \frac{0.5}{\sqrt{n}}$$
 We know that for a sample proportion a value of $\pi = 0.5$ produces the maximum standard error, this is due to the fact that we have the most uncertainty about the population proportion.
 
 Let's compute other two SE for different values of $\pi$: $\pi_1 = 0.1$ and $\pi_2 = 0.8$.
@@ -338,16 +328,16 @@ To show that $n = \frac{1}{M^2}$ is a safe sample size to within M with
 95% probability, let's consider that $M = 1.96 * SE(\pi) =1.96 \sqrt{\frac{\pi (1-\pi)}{n}}$.
 Let's work with $\pi = 0.5$, the value that maximizes the SE, solving for n we obtain that $n = \frac{1.96^2 * 0.5 ^ 2}{M^2} = \frac{0.96}{M^2}$. Since $n = \frac{1}{M^2} > \frac{0.96}{M^2}$ that is the worst scenario case for the SE, we can safely say that $n = \frac{1}{M^2}$ is an acceptable sample size.
 
+
+
 ## FSDS - Chapter 5
 
 
 
 ### Ex 5.2
 
-When a government does not have enough money to pay for the services that it provides, it can raise taxes or it can reduce services. When the Florida Poll asked a random sample of 1200
-Floridians which they preferred, 52% (624 of the 1200) chose raise taxes and 48% chose reduce services. Let $\pi$ denote the population proportion of Floridians who would choose raising taxes.
-Analyze whether this is a minority of the population ($\pi < 0.50$) or a majority ($\pi > 0.50$) by
-testing $H_0 ∶ \pi = 0.50$ against $H_a: \pi \ne 0.50$. Interpret the P-value. Is it appropriate to “accept $H_0$? Why or why not?
+When a government does not have enough money to pay for the services that it provides, it can raise taxes or it can reduce services. When the Florida Poll asked a random sample of 1200 Floridians which they preferred, $52%$ (624 of the 1200) chose raise taxes and $48%$ chose reduce services. Let $\pi$ denote the population proportion of Floridians who would choose raising taxes.
+Analyze whether this is a minority of the population ($\pi < 0.50$) or a majority ($\pi > 0.50$) by testing $H_0 ∶ \pi = 0.50$ against $H_a: \pi \ne 0.50$. Interpret the P-value. Is it appropriate to “accept $H_0$? Why or why not?
 
 
 **Solution**
@@ -363,12 +353,11 @@ and the alternative hypothesis
 $$
 H_1: \pi \neq 0.50
 $$
-We then calculate the test statistic
+We then calculate the test statistic:
 
 $$
-z = \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}} = \frac{0.52 - 0.50}{\sqrt{\frac{0.50(1 - 0.50)}{1200}}}
+z = \frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}
 $$
-
 ```{r}
 z = (0.52 - 0.50) / sqrt(0.5*(1 - 0.5) / 1200)
 ```
@@ -387,8 +376,7 @@ The $p$-value is interpreted as the aforementioned probability. Although we have
 
 ### Ex 5.12
 
-The example in Section 3.1.4 described an experiment to estimate the mean sales with a proposed menu for a new restaurant. In a revised experiment to compare two menus, on Tuesday of the opening week the owner gives customers menu A and on Wednesday she gives them menu B. The bills average \$22.30 for the 43 customers on Tuesday ($s = 6.88$) and \$25.91 for the 50 customers on Wednesday ($s = 8.01$). Under the strong assumption that her customers each night are comparable to a random sample from the conceptual population of potential customers, show how to compare the mean sales for the two menus based on (a) the P-value of a significance
-test, (b) a 95% confidence interval. Which is more informative, and why? (When used in an experiment to compare two treatments to determine which works better, a two-sample test is often called an A/B test.) 
+The example in Section 3.1.4 described an experiment to estimate the mean sales with a proposed menu for a new restaurant. In a revised experiment to compare two menus, on Tuesday of the opening week the owner gives customers menu A and on Wednesday she gives them menu B. The bills average \$22.30 for the 43 customers on Tuesday ($s = 6.88$) and \$25.91 for the 50 customers on Wednesday ($s = 8.01$). Under the strong assumption that her customers each night are comparable to a random sample from the conceptual population of potential customers, show how to compare the mean sales for the two menus based on (a) the P-value of a significance test, (b) a $95%$ confidence interval. Which is more informative, and why? (When used in an experiment to compare two treatments to determine which works better, a two-sample test is often called an A/B test.) 
 
 **Solution**
 
@@ -399,7 +387,7 @@ $$
 and the test statistic to be considered is
 
 $$
-t = \frac{\bar{x_1} - \bar{y_2}}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
+\hat t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
 $$
 
 where $X_1$ and $X_2$ are the r.v.s corresponding to the two scenarios (and $s_1$, $s_2$, $n_1$ and $n_2$ are standard deviation and sample size of, respectively, $X_1$ and $X_2$).
@@ -431,7 +419,7 @@ $$
 yielding the interval
 
 $$
-CI_{95\%}=[-6.677009, -0.5429912]
+CI_{95\%}=[-6.67, -0.54]
 $$
 for the difference $\mu_1 - \mu_2$. The mean difference computed on our data is $\mu_1 - \mu_2 = 22.3 - 25.91 = -3.91 \in CI_{95\%}$.
 
@@ -444,7 +432,7 @@ Explain why the confidence interval based on the Wald test of $H_0: \theta = \th
 
 **Solution**
 
-In building a confidence interval based on the Wald test for a binomial distribution, the parameter of interest is estimated by approximating the error distribution with a normal distribution. Therefore, by definition of the estimate of the parameter of interest $p_0$, the resulting interval will be symmetric around $p_0$ itself (mean of the distribution). As stated in literature, the performance of Wald test-based confidence interval can be poor with certain choices of binomial parameters, and in general and the sample size is not big enough or when the sought after proportion approaches its boundaries (tends to 0 or 1). In such scenarios, the symmetry of the unbounded error distribution can generated incompatible intervals, i.e. exceeding the boundaries, as obtained in the following snippet.
+In building a confidence interval based on the Wald test for a binomial distribution, the parameter of interest is estimated by approximating the error distribution with a normal distribution. Therefore, by definition of the estimate of the parameter of interest $p_0$, the resulting interval will be symmetric around $p_0$ itself (mean of the distribution). As stated in literature, the performance of Wald test-based confidence interval can be poor with certain choices of binomial parameters, and in general when the sample size is not big enough or when the sought after proportion approaches its boundaries (tends to 0 or 1). In such scenarios, the symmetry of the unbounded error distribution can generate incompatible intervals, i.e. exceeding the boundaries, as obtained in the following snippet.
 
 ```{r 5_68}
 waldInterval <- function(x, n, conf.level = 0.95) {
@@ -455,16 +443,15 @@ waldInterval <- function(x, n, conf.level = 0.95) {
  c(p + z * serr, p - z * serr)
 }
 
-p = 0.99
-trials = 100
-n = 1000
-x = rbinom(n, trials, p)
-coverage = as.numeric()
+p <- 0.99
+trials <- 100
+n <- 1000
+x <- rbinom(n, trials, p)
+coverage <- as.numeric()
 for (j in 1 : n) {
   ci <- waldInterval(x=x[j], n=trials)
-  coverage[j] = (ci[1] < p) & (p < ci[2])
+  coverage[j] <- (ci[1] < p) & (p < ci[2])
 }
 mean(coverage)
 ```
 The mean coverage shows the accuracy of the Wald interval for the fixed proportion $p$, highlighting a degrading performance when approaching, in this example, the upper boundary $1$.
-
