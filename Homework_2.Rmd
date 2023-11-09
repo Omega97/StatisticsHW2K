@@ -1,6 +1,6 @@
 ---
 title: "Homework_2"
-author: "Stromieri, Cusma Fait, Esposito, Lucas"
+author: "Cusma Fait, Esposito, Lucas, Stromieri"
 date: "2023-10-27"
 output: html_document
 ---
@@ -209,7 +209,7 @@ where $g[T(y);\theta] = \pi^{n}(1-\pi)^{({\sum_{i=1}^{n}y_i}) - n}$, $T(Y) = {\s
 
 We can gather that $T(Y) = {\sum_{i=1}^{n}y_i}$ is a sufficient statistic for $\pi$.
 
-b) To find the maximum likelihood estimator for $\pi$ let's first compute the log likelihood function: $$ l(\pi) = n \space ln(\pi)+(\sum_{i=1}^{n}y_i) \space ln(1-\pi)$$
+b) To find the maximum likelihood estimator for $\pi$ let's first compute the log likelihood function: $$ l(\pi) = n \space ln(\pi)+[(\sum_{i=1}^{n}y_i)-n] \space ln(1-\pi)$$
 
 Then we differentiate and equate to zero : $$\frac{\partial l(\pi)}{\partial \pi} = \frac{n}{\pi} - \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi}$$
 $$ \frac{n}{\pi} - \frac{(\sum_{i=1}^{n}y_i)-n}{1-\pi} = 0 $$
@@ -314,8 +314,12 @@ Let's compute the standard error for the sample proportion $SE(\pi) = \sqrt{\fra
 $$ SE(\pi) = \sqrt{\frac{0.5 ^2}{n}} = \frac{0.5}{\sqrt{n}}$$
 We know that for a sample proportion a value of $\pi = 0.5$ produces the maximum standard error, this is due to the fact that we have the most uncertainty about the population proportion.
 
+We can verify this by equating the first derivative to zero to find the maximum for the $SE(\pi)$:
+$$ \frac{\partial SE(\pi)}{\partial \pi} = \frac{1-2\pi}{2 \sqrt{n \space \pi \space (1-\pi)}} = 0$$
+$ \pi = \frac{1}{2} = 0.5$
+
 Let's compute other two SE for different values of $\pi$: $\pi_1 = 0.1$ and $\pi_2 = 0.8$.
-$SE(\pi_1) = \sqrt{\frac{0.1*0.9}{n}}\rightarrow \frac{0.28}{\sqrt{n}}$ and $SE(\pi_2) = \sqrt{\frac{0.2*0.8}{n}}\rightarrow \frac{0.36}{\sqrt{n}}$.
+$SE(\pi_1) = \sqrt{\frac{0.1 \cdot 0.9}{n}}= \frac{0.28}{\sqrt{n}}$ and $SE(\pi_2) = \sqrt{\frac{0.2 \cdot 0.8}{n}}= \frac{0.36}{\sqrt{n}}$.
 Both these standard errors are lower than the standard error for $\pi = 0.5$, as expected.
 
 Assuming we have a large enough sample size, the distribution of the sample proportion becomes approximately normal due to the Central Limit Theorem.
@@ -325,8 +329,8 @@ When $\pi = 0.5$ about 95% of the time, the sample proportion will be within 2 *
 The same applies to all the other values of $\pi$, since the standard error will be different but always smaller than the SE with $\pi = 0.5$.
 
 To show that $n = \frac{1}{M^2}$ is a safe sample size to within M with 
-95% probability, let's consider that $M = 1.96 * SE(\pi) =1.96 \sqrt{\frac{\pi (1-\pi)}{n}}$.
-Let's work with $\pi = 0.5$, the value that maximizes the SE, solving for n we obtain that $n = \frac{1.96^2 * 0.5 ^ 2}{M^2} = \frac{0.96}{M^2}$. Since $n = \frac{1}{M^2} > \frac{0.96}{M^2}$ that is the worst scenario case for the SE, we can safely say that $n = \frac{1}{M^2}$ is an acceptable sample size.
+95% probability, let's consider that $M = 1.96 \cdot SE(\pi) =1.96 \sqrt{\frac{\pi (1-\pi)}{n}}$.
+Let's work with $\pi = 0.5$, the value that maximizes the SE, solving for n we obtain that $n = \frac{1.96^2 \cdot 0.5 ^ 2}{M^2} = \frac{0.96}{M^2}$. Since $n = \frac{1}{M^2} > \frac{0.96}{M^2}$ that is the worst scenario case for the SE, we can safely say that $n = \frac{1}{M^2}$ is an acceptable sample size.
 
 
 
