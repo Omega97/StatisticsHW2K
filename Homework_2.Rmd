@@ -326,7 +326,7 @@ $$ \frac{\partial SE(\pi)}{\partial \pi} = \frac{1-2\pi}{2 \sqrt{n \space \pi \s
 $ \pi = \frac{1}{2} = 0.5$
 
 Let's compute other two SE for different values of $\pi$: $\pi_1 = 0.1$ and $\pi_2 = 0.8$.
-$SE(\pi_1) = \sqrt{\frac{0.1 \cdot 0.9}{n}}= \frac{0.28}{\sqrt{n}}$ and $SE(\pi_2) = \sqrt{\frac{0.2 \cdot 0.8}{n}}= \frac{0.36}{\sqrt{n}}$.
+$SE(\pi_1) = \sqrt{\frac{0.1 \cdot 0.9}{n}}= \frac{0.3}{\sqrt{n}}$ and $SE(\pi_2) = \sqrt{\frac{0.2 \cdot 0.8}{n}}= \frac{0.4}{\sqrt{n}}$.
 Both these standard errors are lower than the standard error for $\pi = 0.5$, as expected.
 
 Assuming we have a large enough sample size, the distribution of the sample proportion becomes approximately normal due to the Central Limit Theorem.
