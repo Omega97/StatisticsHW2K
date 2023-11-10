@@ -15,33 +15,40 @@ set.seed(0)
 
 ### Ex 3.12
 
-Simulate random sampling from a normal population distribution with several n values to
-illustrate the law of large numbers.
+Simulate random sampling from a normal population distribution with several $n$ values to illustrate the law of large numbers.
 
 
 **Solution**
 
-We simulate a list of independent samples from a normal population.
+We simulate a list of $n$ independent samples from a normal population for various values of $n$. For each sample, we calculate the sample mean, and then we plot the result. 
 
 ```{r 3_12}
-n <- 100
-x <- rnorm(n)
-y <- rep(0, n)
+n_max <- 200
+y <- rep(0, n_max)
 
-for (i in 1:n) {
-  y[i] <- mean(x[1:i])
+for (i in 1:n_max) {
+  x <- rnorm(i)
+  y[i] <- mean(x)
 }
 
-x_axis = 1:n
-plot(x_axis, abs(y), type='l', ylim=c(-0.1, +1.1), 
-     main='Absolute sample mean', xlab='n', ylab='abs mean')
-lines(c(1, n), c(0, 0), col='red')
-lines(x_axis, +x_axis^(-1/2), col='red', lty='dashed')
+x_axis = 1:n_max
 
+plot(x_axis, y, xlab = 'n', ylab = 'sample mean', 
+     main='Sample mean', ylim=c(-.6,.6))
+y_sigma <- x_axis^(-1/2)
+lines(x_axis, y_sigma, col='red', lty = 'dashed')
+lines(x_axis, x_axis*0, col='red')
+lines(x_axis, -y_sigma, col='red', lty = 'dashed')
 ```
 
-The solid black line shows how the absolute sample mean is converging to 0 as
-the sample size increases, while the dashed red line is its expected behavior. 
+The black marks represent the sample mean for samples of various sizes. The solid red line represents the true mean, while the dashed red lines represent the theoretical standard deviation of the sample mean from the actual mean:
+$$\sigma_{theo}(n)=\frac{\sigma_0}{\sqrt n} = \frac{1}{\sqrt n}$$
+Therefore, we would expect to find about $68.3\%$ of the points under the red curve;
+
+```{r 3_12_b}
+sum(abs(y) < y_sigma)/n_max
+```
+We can conclude that our demonstration accurately describes the relation between the distribution of the sample mean and the sample size. 
 
 
 
